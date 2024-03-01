@@ -1,16 +1,26 @@
-# pagination_flutter
+🚀 Welcome to Infinite Scroll Pagination Flutter!
 
-A new Flutter project.
+This Flutter project implements infinite scroll pagination, providing a seamless browsing experience for your users. With infinite scroll, new content is loaded automatically as the user reaches the end of the current content, eliminating the need for traditional pagination buttons.
 
-## Getting Started
+Features:
+🔄 Infinite scroll pagination for smooth browsing.
+📱 Flutter framework for cross-platform compatibility.
+💻 Easily customizable to fit your specific needs.
+Getting Started:
+Clone this repository.
+Navigate to the project directory.
+Run flutter pub get to install dependencies.
+Connect your device or emulator.
+Run flutter run to launch the app.
 
-This project is a starting point for a Flutter application.
+Demo:
+<p>
+<img src="https://github.com/bhargav0147/pagination_flutter/assets/119872080/0a1c914a-2901-4e3f-a6cc-2b0fdb95df9c" height="20%" width="30%" >
+</p>
 
-A few resources to get you started if this is your first Flutter project:
+Contributing:
+Contributions are welcome! If you'd like to contribute to this project, please fork the repository and submit a pull request.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+License:
+This project is free and open-source, available under the MIT License. Feel free to use, modify, and distribute the code as needed.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.

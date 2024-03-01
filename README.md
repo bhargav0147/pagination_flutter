@@ -14,9 +14,7 @@ Connect your device or emulator.
 Run flutter run to launch the app.
 
 Demo:
-<p>
-<img src="https://github.com/bhargav0147/pagination_flutter/assets/119872080/0a1c914a-2901-4e3f-a6cc-2b0fdb95df9c" height="20%" width="30%" >
-</p>
+https://github.com/bhargav0147/pagination_flutter/assets/119872080/0a1c914a-2901-4e3f-a6cc-2b0fdb95df9c
 
 Contributing:
 Contributions are welcome! If you'd like to contribute to this project, please fork the repository and submit a pull request.

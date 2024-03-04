@@ -1,4 +1,4 @@
-🚀 Welcome to Infinite Scroll Pagination Flutter!
+🚀 Welcome to Infinite Scroll Pagination Flutter With GetX!
 
 This Flutter project implements infinite scroll pagination, providing a seamless browsing experience for your users. With infinite scroll, new content is loaded automatically as the user reaches the end of the current content, eliminating the need for traditional pagination buttons.
 

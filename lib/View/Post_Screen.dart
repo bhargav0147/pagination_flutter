@@ -1,10 +1,9 @@
 // ignore_for_file: file_names
 
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+import 'package:get/get.dart';
+import 'package:pagination_flutter/Controller/Post_Controller.dart';
 
 class PostScreen extends StatefulWidget {
   const PostScreen({super.key});
@@ -14,23 +13,21 @@ class PostScreen extends StatefulWidget {
 }
 
 class _PostScreenState extends State<PostScreen> {
-  List postList = [];
-  int page = 1;
-  bool haseMoreData = true;
+  PostController controller = Get.put(PostController());
   ScrollController scrollController = ScrollController();
   @override
   void initState() {
     super.initState();
     scrollController.addListener(
       () {
-        if(scrollController.position.maxScrollExtent == scrollController.offset)
-        {
-            ++page;
-            fetchData();
+        if (scrollController.position.maxScrollExtent ==
+            scrollController.offset) {
+          ++controller.page;
+          controller.fetchData();
         }
       },
     );
-    fetchData();
+    controller.fetchData();
   }
 
   @override
@@ -51,36 +48,42 @@ class _PostScreenState extends State<PostScreen> {
                     color: Colors.white),
               ),
             ),
-            body: postList.isNotEmpty
-                ? ListView.builder(
-                  controller: scrollController,
-                    physics: const BouncingScrollPhysics(),
-                    itemBuilder: (context, index) {
-                      if (index < postList.length) {
-                        return postCard(postList[index], index);
-                      } else {
-                        return Center(
-                            child: haseMoreData?const CupertinoActivityIndicator(
-                          color: Colors.deepPurple,
-                          radius: 30,
-                        ):const Text('No More Data',style: TextStyle(
-                          letterSpacing: 1,
-                          fontSize: 18,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w400
-                        ),));
-                      }
-                    },
-                    itemCount: postList.length + 1,
-                  )
-                : const Padding(
-                  padding: EdgeInsets.all(10.0),
-                  child: Center(
-                      child: CupertinoActivityIndicator(
-                      color: Colors.deepPurple,
-                      radius: 10,
-                                        )),
-                )));
+            body: Obx(
+              () => controller.postList.isNotEmpty
+                  ? ListView.builder(
+                      controller:scrollController,
+                      physics: const BouncingScrollPhysics(),
+                      itemBuilder: (context, index) {
+                        if (index < controller.postList.length) {
+                          return postCard(controller.postList[index], index);
+                        } else {
+                          return Center(
+                              child: controller.haseMoreData
+                                  ? const CupertinoActivityIndicator(
+                                      color: Colors.deepPurple,
+                                      radius: 15,
+                                    )
+                                  : const Text(
+                                      'No More Data',
+                                      style: TextStyle(
+                                          letterSpacing: 1,
+                                          fontSize: 18,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w400),
+                                    ));
+                        }
+                      },
+                      itemCount: controller.postList.length + 1,
+                    )
+                  : const Padding(
+                      padding: EdgeInsets.all(10.0),
+                      child: Center(
+                          child: CupertinoActivityIndicator(
+                        color: Colors.deepPurple,
+                        radius: 10,
+                      )),
+                    ),
+            )));
   }
 
   Widget postCard(String text, int index) {
@@ -153,24 +156,6 @@ class _PostScreenState extends State<PostScreen> {
         ),
       ),
     );
-  }
-
-  Future<void> fetchData() async {
-    int limit = 10;
-    final url = Uri.parse(
-        'https://jsonplaceholder.typicode.com/posts?_page=$page&_limit=$limit');
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      final List data = jsonDecode(response.body);
-      if(data.length < limit)
-      {
-        haseMoreData = false;
-      }
-      setState(() {
-        postList.addAll(data.map((e) => e['body']));
-      });
-    }
   }
 
   @override
